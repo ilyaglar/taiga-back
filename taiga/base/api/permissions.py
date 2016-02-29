@@ -20,7 +20,7 @@ import abc
 from functools import reduce
 
 from taiga.base.utils import sequence as sq
-from taiga.permissions.service import user_has_perm, is_project_admin
+from taiga.permissions.service import user_has_perm, is_project_owner
 from django.apps import apps
 
 from django.utils.translation import ugettext as _
@@ -206,9 +206,9 @@ class HasMandatoryParam(PermissionComponent):
         return False
 
 
-class IsProjectAdmin(PermissionComponent):
+class IsProjectOwner(PermissionComponent):
     def check_permissions(self, request, view, obj=None):
-        return is_project_admin(request.user, obj)
+        return is_project_owner(request.user, obj)
 
 
 class IsObjectOwner(PermissionComponent):
